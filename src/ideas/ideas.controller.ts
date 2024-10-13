@@ -1,4 +1,15 @@
-import {Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    NotFoundException,
+    Param,
+    ParseIntPipe,
+    Post,
+    Put,
+    ValidationPipe
+} from '@nestjs/common';
 import { CreateIdeaDto } from "./dto/create-idea.dto";
 import { UpdateIdeaDto } from "./dto/update-idea.dto";
 import { IdeasService } from "./ideas.service";
@@ -34,7 +45,7 @@ export class IdeasController {
     }
 
     @Post()
-    createIdea(@Body() createIdeaDto: CreateIdeaDto) {
+    createIdea(@Body(new ValidationPipe()) createIdeaDto: CreateIdeaDto) {
         const createdIdea = this.ideasService.createIdea(createIdeaDto);
 
         return {
@@ -44,7 +55,7 @@ export class IdeasController {
     }
 
     @Put(':id')
-    updateIdeaById(@Param('id', ParseIntPipe) id: number, @Body() updateIdeaDto: UpdateIdeaDto) {
+    updateIdeaById(@Param('id', ParseIntPipe) id: number, @Body(new ValidationPipe()) updateIdeaDto: UpdateIdeaDto) {
         try {
             const updatedIdea = this.ideasService.updateIdeaById(id, updateIdeaDto);
 
