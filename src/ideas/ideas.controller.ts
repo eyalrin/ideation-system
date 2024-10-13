@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put} from '@nestjs/common';
 import { CreateIdeaDto } from "./dto/create-idea.dto";
 import { UpdateIdeaDto } from "./dto/update-idea.dto";
 import { IdeasService } from "./ideas.service";
@@ -19,7 +19,7 @@ export class IdeasController {
     }
 
     @Get(':id')
-    getIdeaById(@Param('id') id: string) {
+    getIdeaById(@Param('id', ParseIntPipe) id: number) {
         try {
             const idea = this.ideasService.getIdeaById(id);
 
@@ -44,7 +44,7 @@ export class IdeasController {
     }
 
     @Put(':id')
-    updateIdeaById(@Param('id') id: string, @Body() updateIdeaDto: UpdateIdeaDto) {
+    updateIdeaById(@Param('id', ParseIntPipe) id: number, @Body() updateIdeaDto: UpdateIdeaDto) {
         try {
             const updatedIdea = this.ideasService.updateIdeaById(id, updateIdeaDto);
 
@@ -67,7 +67,7 @@ export class IdeasController {
     }
 
     @Delete(':id')
-    deleteIdeaById(@Param('id') id: string) {
+    deleteIdeaById(@Param('id', ParseIntPipe) id: number) {
         try {
             this.ideasService.deleteIdeaById(id);
 

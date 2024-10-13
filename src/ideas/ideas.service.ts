@@ -6,15 +6,15 @@ import { UpdateIdeaDto } from "./dto/update-idea.dto";
 @Injectable()
 export class IdeasService {
     private ideas: IdeaEntity[] = [
-        { id: '1', title: 'title 1', description: 'description 1' },
-        { id: '2', title: 'title 2', description: 'description 2' }
+        { id: 1, title: 'title 1', description: 'description 1' },
+        { id: 2, title: 'title 2', description: 'description 2' }
     ]
 
     getIdeas(): IdeaEntity[] {
         return this.ideas;
     }
 
-    getIdeaById(id: string): IdeaEntity {
+    getIdeaById(id: number): IdeaEntity {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
@@ -25,13 +25,13 @@ export class IdeasService {
     }
 
     createIdea(createIdeaDto: CreateIdeaDto): IdeaEntity {
-        const newIdea = { ...createIdeaDto, id: Date.now().toString() };
+        const newIdea = { ...createIdeaDto, id: Date.now() };
         this.ideas.push(newIdea);
 
         return newIdea;
     }
 
-    updateIdeaById(id: string, updateIdeaDto: UpdateIdeaDto): IdeaEntity {
+    updateIdeaById(id: number, updateIdeaDto: UpdateIdeaDto): IdeaEntity {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
@@ -59,7 +59,7 @@ export class IdeasService {
         this.ideas = [];
     }
 
-    deleteIdeaById(id: string): void {
+    deleteIdeaById(id: number): void {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
