@@ -24,7 +24,11 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A backend ideation system.
+
+Users can submit ideas to the system and be able to read them.
+
+The system core stack is Node.js, TypeScript, NestJS, and MongoDB.
 
 ## Project setup
 
