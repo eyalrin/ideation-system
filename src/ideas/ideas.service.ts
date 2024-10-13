@@ -18,7 +18,7 @@ export class IdeasService {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
-            throw new NotFoundException('Idea not found');
+            throw new Error(`Idea with id ${id} not found`);
         }
 
         return idea;
@@ -35,7 +35,7 @@ export class IdeasService {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
-            throw new NotFoundException('Idea not found');
+            throw new Error(`Idea with id ${id} not found`);
         }
 
         let updatedIdea: IdeaEntity = undefined;
@@ -63,7 +63,7 @@ export class IdeasService {
         const idea = this.ideas.find(idea => idea.id === id);
 
         if (!idea) {
-            throw new NotFoundException('Idea not found');
+            throw new Error(`Idea with id ${id} not found`);
         }
 
         this.ideas = this.ideas.filter(idea => idea.id !== id);

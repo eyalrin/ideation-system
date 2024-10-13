@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {Body, Controller, Delete, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
 import { CreateIdeaDto } from "./dto/create-idea.dto";
 import { UpdateIdeaDto } from "./dto/update-idea.dto";
 import { IdeasService } from "./ideas.service";
@@ -20,11 +20,16 @@ export class IdeasController {
 
     @Get(':id')
     getIdeaById(@Param('id') id: string) {
-        const idea = this.ideasService.getIdeaById(id);
+        try {
+            const idea = this.ideasService.getIdeaById(id);
 
-        return {
-            message: `Found an idea with id ${id}`,
-            idea: idea
+            return {
+                message: `Found an idea with id ${id}`,
+                idea: idea
+            }
+        }
+        catch (error) {
+            throw new NotFoundException(error.message);
         }
     }
 
@@ -40,11 +45,15 @@ export class IdeasController {
 
     @Put(':id')
     updateIdeaById(@Param('id') id: string, @Body() updateIdeaDto: UpdateIdeaDto) {
-        const updatedIdea = this.ideasService.updateIdeaById(id, updateIdeaDto);
+        try {
+            const updatedIdea = this.ideasService.updateIdeaById(id, updateIdeaDto);
 
-        return {
-            message: `Updated the idea with id ${id}`,
-            idea: updatedIdea
+            return {
+                message: `Updated the idea with id ${id}`,
+                idea: updatedIdea
+            }
+        } catch (error) {
+            throw new NotFoundException(error.message);
         }
     }
 
@@ -59,10 +68,14 @@ export class IdeasController {
 
     @Delete(':id')
     deleteIdeaById(@Param('id') id: string) {
-        this.ideasService.deleteIdeaById(id);
+        try {
+            this.ideasService.deleteIdeaById(id);
 
-        return {
-            message: `Deleted an idea with id ${id}`,
+            return {
+                message: `Deleted an idea with id ${id}`,
+            }
+        } catch (error) {
+            throw new NotFoundException(error.message);
         }
     }
 }
