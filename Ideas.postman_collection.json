@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "99e81fbd-0d51-40e9-9cd7-e4aada4508af",
+		"name": "Ideas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17027270"
+	},
+	"item": [
+		{
+			"name": "getIdeas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/ideas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getIdeaById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/ideas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createIdea",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"title 1\",\n    \"description\": \" description 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/ideas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateIdeaById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"title 4444\",\n    \"description\": \" description 4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/ideas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteIdeas",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/ideas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteIdeaById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/ideas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ideas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
