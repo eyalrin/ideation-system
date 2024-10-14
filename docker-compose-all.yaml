@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: npm run start:dev # For development mode, change to start:prod for production
+    command: npm run start:dev
 
   mongo:
     container_name: mongo
