@@ -1,71 +1,35 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IdeaEntity } from "./entities/idea.entity";
 import { CreateIdeaDto } from "./dto/create-idea.dto";
 import { UpdateIdeaDto } from "./dto/update-idea.dto";
+import { IdeasRepository } from "./ideas.repository";
+import { Idea } from "./schemas/idea.schema";
 
 @Injectable()
 export class IdeasService {
-    private ideas: IdeaEntity[] = [
-        { id: 1, title: 'title 1', description: 'description 1' },
-        { id: 2, title: 'title 2', description: 'description 2' }
-    ]
 
-    getIdeas(): IdeaEntity[] {
-        return this.ideas;
+    constructor(private readonly ideasRepository: IdeasRepository) {}
+
+    async getAll(): Promise<Idea[]> {
+        return this.ideasRepository.findAll();
     }
 
-    getIdeaById(id: number): IdeaEntity {
-        const idea = this.ideas.find(idea => idea.id === id);
-
-        if (!idea) {
-            throw new Error(`Idea with id ${id} not found`);
-        }
-
-        return idea;
+    async getById(id: number): Promise<Idea> {
+        return this.ideasRepository.findById(id);
     }
 
-    createIdea(createIdeaDto: CreateIdeaDto): IdeaEntity {
-        const newIdea = { ...createIdeaDto, id: Date.now() };
-        this.ideas.push(newIdea);
-
-        return newIdea;
+    async create(createIdeaDto: CreateIdeaDto): Promise<Idea> {
+        return this.ideasRepository.save(createIdeaDto);
     }
 
-    updateIdeaById(id: number, updateIdeaDto: UpdateIdeaDto): IdeaEntity {
-        const idea = this.ideas.find(idea => idea.id === id);
-
-        if (!idea) {
-            throw new Error(`Idea with id ${id} not found`);
-        }
-
-        let updatedIdea: IdeaEntity = undefined;
-
-        this.ideas = this.ideas.map((idea) => {
-            if (idea.id === id) {
-                updatedIdea =  {
-                    ...idea,
-                    ...updateIdeaDto
-                };
-
-                return updatedIdea;
-            }
-            return idea;
-        });
-
-        return updatedIdea;
+    async updateById(id: number, updateIdeaDto: UpdateIdeaDto): Promise<Idea> {
+        return this.ideasRepository.update(id, updateIdeaDto);
     }
 
-    deleteIdeas(): void {
-        this.ideas = [];
+    async deleteAll(): Promise<void> {
+        return this.ideasRepository.deleteAll();
     }
 
-    deleteIdeaById(id: number): void {
-        const idea = this.ideas.find(idea => idea.id === id);
-
-        if (!idea) {
-            throw new Error(`Idea with id ${id} not found`);
-        }
-
-        this.ideas = this.ideas.filter(idea => idea.id !== id);
+    async deleteById(id: number): Promise<void> {
+        return this.ideasRepository.deleteById(id);
     }
 }

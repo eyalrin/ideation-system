@@ -20,8 +20,8 @@ export class IdeasController {
     constructor(private readonly ideasService: IdeasService) {}
 
     @Get()
-    getIdeas() {
-        const ideas = this.ideasService.getIdeas();
+    async getIdeas() {
+        const ideas = await this.ideasService.getAll();
 
         return {
             message: `Listing all ideas`,
@@ -30,9 +30,9 @@ export class IdeasController {
     }
 
     @Get(':id')
-    getIdeaById(@Param('id', ParseIntPipe) id: number) {
+    async getIdeaById(@Param('id', ParseIntPipe) id: number) {
         try {
-            const idea = this.ideasService.getIdeaById(id);
+            const idea = await this.ideasService.getById(id);
 
             return {
                 message: `Found an idea with id ${id}`,
@@ -45,8 +45,8 @@ export class IdeasController {
     }
 
     @Post()
-    createIdea(@Body(new ValidationPipe()) createIdeaDto: CreateIdeaDto) {
-        const createdIdea = this.ideasService.createIdea(createIdeaDto);
+    async createIdea(@Body(new ValidationPipe()) createIdeaDto: CreateIdeaDto) {
+        const createdIdea = await this.ideasService.create(createIdeaDto);
 
         return {
             message: `Created an idea with id ${createdIdea.id}`,
@@ -55,9 +55,9 @@ export class IdeasController {
     }
 
     @Put(':id')
-    updateIdeaById(@Param('id', ParseIntPipe) id: number, @Body(new ValidationPipe()) updateIdeaDto: UpdateIdeaDto) {
+    async updateIdeaById(@Param('id', ParseIntPipe) id: number, @Body(new ValidationPipe()) updateIdeaDto: UpdateIdeaDto) {
         try {
-            const updatedIdea = this.ideasService.updateIdeaById(id, updateIdeaDto);
+            const updatedIdea = await this.ideasService.updateById(id, updateIdeaDto);
 
             return {
                 message: `Updated the idea with id ${id}`,
@@ -69,8 +69,8 @@ export class IdeasController {
     }
 
     @Delete()
-    deleteIdeas() {
-        this.ideasService.deleteIdeas();
+    async deleteIdeas() {
+        await this.ideasService.deleteAll();
 
         return {
             message: `Deleted all ideas`,
@@ -78,9 +78,9 @@ export class IdeasController {
     }
 
     @Delete(':id')
-    deleteIdeaById(@Param('id', ParseIntPipe) id: number) {
+    async deleteIdeaById(@Param('id', ParseIntPipe) id: number) {
         try {
-            this.ideasService.deleteIdeaById(id);
+            await this.ideasService.deleteById(id);
 
             return {
                 message: `Deleted an idea with id ${id}`,
