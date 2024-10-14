@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { IdeasController } from './ideas.controller';
-import {InternalServerErrorException, NotFoundException, ParseIntPipe} from "@nestjs/common";
-import {CreateIdeaDto} from "./dto/create-idea.dto";
-import {UpdateIdeaDto} from "./dto/update-idea.dto";
+import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { CreateIdeaDto } from "./dto/create-idea.dto";
+import { UpdateIdeaDto } from "./dto/update-idea.dto";
 
 class MockIdeasService {
     getAll = jest.fn().mockResolvedValue([
@@ -402,5 +402,4 @@ describe('IdeasController Unit Tests', () => {
             });
         });
     });
-
 });
