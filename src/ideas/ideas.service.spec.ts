@@ -23,7 +23,7 @@ describe('IdeasService Unit Tests', () => {
         service = new IdeasService(mockIdeasRepository as any);
     });
 
-    describe('IdeasService.getAll() getAll method', () => {
+    describe('getAll() method', () => {
 
         describe('Happy Path', () => {
             it('should return an array of ideas when repository returns data', async () => {
@@ -68,7 +68,7 @@ describe('IdeasService Unit Tests', () => {
         });
     });
 
-    describe('IdeasService.getById() getById method', () => {
+    describe('getById() method', () => {
 
         describe('Happy Path', () => {
             it('should return an idea when a valid ID is provided', async () => {
@@ -117,7 +117,7 @@ describe('IdeasService Unit Tests', () => {
         });
     });
 
-    describe('IdeasService.create() create method', () => {
+    describe('create() method', () => {
 
         describe('Happy Path', () => {
             it('should successfully create an idea', async () => {
@@ -194,7 +194,7 @@ describe('IdeasService Unit Tests', () => {
         });
     });
 
-    describe('IdeasService.updateById() updateById method', () => {
+    describe('updateById() method', () => {
 
         describe('Happy Path', () => {
             it('should update an idea successfully', async () => {
@@ -284,7 +284,7 @@ describe('IdeasService Unit Tests', () => {
         });
     });
 
-    describe('IdeasService.deleteAll() deleteAll method', () => {
+    describe('deleteAll() method', () => {
 
         describe('Happy Path', () => {
             it('should successfully delete all ideas', async () => {
@@ -313,7 +313,7 @@ describe('IdeasService Unit Tests', () => {
         });
     });
 
-    describe('IdeasService.deleteById() deleteById method', () => {
+    describe('deleteById() method', () => {
 
         describe('Happy Path', () => {
             it('should delete an idea by id successfully', async () => {
