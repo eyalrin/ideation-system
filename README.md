@@ -18,6 +18,7 @@ graph LR
     A[Client] -->|REST API| B(Ideation System)
     B --> |Mongoose| C{MongoDB}  
 ```
+<b>(Diagram requires mermaid markdown support)</b>
 
 The ideation system, which is bulit with NestJS, exposes a REST API (Documentation available at http://localhost:3000/api).
 All the ideas are saved in a MongoDB (Using `@nestjs/mongoose`).
