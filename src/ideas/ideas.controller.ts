@@ -2,7 +2,7 @@ import {
     Body,
     Controller,
     Delete,
-    Get,
+    Get, InternalServerErrorException,
     NotFoundException,
     Param,
     ParseIntPipe,
@@ -21,11 +21,16 @@ export class IdeasController {
 
     @Get()
     async getIdeas() {
-        const ideas = await this.ideasService.getAll();
+        try {
+            const ideas = await this.ideasService.getAll();
 
-        return {
-            message: `Listing all ideas`,
-            ideas: ideas
+            return {
+                message: `Listing all ideas`,
+                ideas: ideas
+            }
+        }
+        catch (error) {
+            throw new NotFoundException(error.message);
         }
     }
 
@@ -70,10 +75,14 @@ export class IdeasController {
 
     @Delete()
     async deleteIdeas() {
-        await this.ideasService.deleteAll();
+        try {
+            await this.ideasService.deleteAll();
 
-        return {
-            message: `Deleted all ideas`,
+            return {
+                message: `Deleted all ideas`,
+            }
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
         }
     }
 
